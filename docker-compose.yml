@@ -1,0 +1,17 @@
+version: '1'
+services:
+  tfgpu:
+    restart: always
+    build: .
+    container_name: 'tfgpu'
+    working_dir: '/root/src'
+    tty: true
+    volumes:
+      - ./src:/root/src
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
